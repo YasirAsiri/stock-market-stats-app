@@ -1,0 +1,12 @@
+.body-wrapper { 
+    padding-top: 75px; 
+}
+
+footer{
+    display: table;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
