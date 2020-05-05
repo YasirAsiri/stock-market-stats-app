@@ -5,7 +5,7 @@ import Home from './Home.js';
 import Footer from './Footer.js';
 import '../styles/bootstrap.min.css';
 import '../styles/styles.css';
-import Search from './Search.js';
+import History from './History.js';
 import Stock from './Stock.js';
 
 
@@ -18,7 +18,7 @@ function App() {
     <Switch>
       <Route path='/' exact component={Home} />
       <Route path='/stock' exact component={Stock} />
-      <Route path='/search' exact component={Search} />
+      <Route path='/history' exact component={History} />
     </Switch>
     < Footer />
     </div>
