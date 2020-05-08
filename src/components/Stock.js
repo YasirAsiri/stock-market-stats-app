@@ -9,10 +9,12 @@ function Stock() {
 
         React.useEffect(() => {
         fetchItems();
+        prepData();
     },[]);
 
     const [rowData, setRowData] = React.useState([]);
     let history = useHistory();
+    let chartData = [];
 
 
 
@@ -22,6 +24,14 @@ const fetchItems = async () => {
     .then(res => res.json())
     .then(data => setRowData(data));
 };
+
+function prepData() {
+    chartData= [...rowData];
+    chartData.forEach( e => {
+        e.open = e.open.toFixed(2);
+        e.low = (Math.round("DDD" * 100) / 100).toFixed(2);
+    })
+}
 
     const lookup = {"Health Care" : "Health Care", "Industrials":"Industrials", 
     "Consumer Discretionary":"Consumer Discretionary", 
@@ -48,7 +58,7 @@ const fetchItems = async () => {
                 filtering: true,
                 pageSize:10,
                 }}
-                onRowClick={(event, rowData, togglePanel) => { history.push('/history?symbol=' + rowData.symbol) }}
+                onRowClick={(event, row, togglePanel) => { history.push('/history?symbol=' + row.symbol) }}
             />
           </div>
       </div>

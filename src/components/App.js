@@ -7,6 +7,8 @@ import '../styles/bootstrap.min.css';
 import '../styles/styles.css';
 import History from './History.js';
 import Stock from './Stock.js';
+import History2 from './History2.js';
+
 
 
 
