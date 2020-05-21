@@ -1,41 +1,46 @@
 import React from "react";
 import {
-    LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
-  } from 'recharts';
+  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend
+} from 'recharts';
 
+// variable to hold date formating options
+var options = { year: 'numeric', month: 'long', day: 'numeric' };
 
-function DrawChart(props){
+function DrawChart(props) {
 
-
-    console.log("Props.Data", props.data)
-
-    let chartData = [];
-    function getChartData(){
+  // variable to hold data coming from props
+  let chartData = [];
+  // Pushing data to chartData variable with a formated date
+  function getChartData() {
     props.data.forEach(e => {
-      var date = new Date(e.timestamp).toLocaleDateString();
-      chartData.push({close: e.close, timestamp: date})
+      var date = new Date(e.timestamp).toLocaleDateString('en-GB', options)
+      chartData.push({ close: e.close, timestamp: date })
     })
     return chartData;
   }
 
-    return (
-        <LineChart
+  return (
+    <div className='chart' >
+      <LineChart
         width={1000}
-        height={300}
+        height={450}
         scalToFit={true}
-        data={getChartData()}
+        // passing chartData reversed in order to display starting from the last record 
+        data={getChartData().reverse()}
         margin={{
-          top: 5, right: 30, left: 20, bottom: 5,
+          top: 20, right: 50, left: 20, bottom: 110,
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey= {props.x}  />
+        <XAxis dataKey={props.x} dy={5} angle={-60} textAnchor="end" />
+
         <YAxis />
         <Tooltip />
-        <Legend />
-        <Line  dataKey={props.y}  />
+        <Legend layout="horizontal" verticalAlign="top" />
+        <Line dataKey={props.y} stroke="#9370DB" dot={false} />
       </LineChart>
-    );
+    </div>
+  );
 
 }
 
